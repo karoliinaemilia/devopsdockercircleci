@@ -10,12 +10,9 @@ workflows:
           tag: 'latest'
   heroku_deploy:
     jobs:
-      - build
+      - build:
+          docker:
+            - image: karoliinaemilia/dockercircle
       - heroku/deploy-via-git:
           requires:
             - build
-
-jobs:
-  build:
-    docker:
-      - image: karoliinaemilia/dockercircle
