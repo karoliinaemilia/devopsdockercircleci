@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 jobs:
   build:
     machine: true
@@ -16,7 +16,6 @@ jobs:
                    docker push registry.heroku.com/dockercircle/web
                    heroku container:release dockercircle
 workflows:
-  version: 2
   jobs:
     - build
 
