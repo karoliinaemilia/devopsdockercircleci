@@ -4,17 +4,17 @@ workflows:
     jobs:
       - build_and_publish
 jobs:
-  - build_and_publish:
-      machine: true
-      working_directory: ~/devopsdockercircleci
-      steps:
-        - checkout
-        - run:
-            command: docker build -t dockercircle .
-        - run:
-            command: | 
-              docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
-              docker push karoliinaemilia/dockercircle
-              docker tag registry.heroku.com/dockercircle/web karoliinaemilia/dockercircle
-              docker push registry.heroku.com/dockercircle/web
-              heroku container:release dockercircle  
+  build_and_publish:
+    machine: true
+    working_directory: ~/devopsdockercircleci
+    steps:
+      - checkout
+      - run:
+          command: docker build -t dockercircle .
+      - run:
+          command: | 
+            docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+            docker push karoliinaemilia/dockercircle
+            docker tag registry.heroku.com/dockercircle/web karoliinaemilia/dockercircle
+            docker push registry.heroku.com/dockercircle/web
+            heroku container:release dockercircle  
