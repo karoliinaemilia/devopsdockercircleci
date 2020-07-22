@@ -1,8 +1,6 @@
 version: 2.1
 jobs:
   build:
-    requires:
-      - docker/publish
     docker:
       - image: karoliinaemilia/dockercircle
     steps:
@@ -16,7 +14,9 @@ workflows:
       - docker/publish:
           image: karoliinaemilia/dockercircle
           tag: 'latest'
-      - build
+      - build:
+         requires:
+           - docker/publish
       - heroku/deploy-via-git:
           requires:
             - build
