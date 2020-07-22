@@ -4,7 +4,9 @@ jobs:
   build:
     machine: 
         enabled: true
+        
     working_directory: ~/devopsdockercircleci
+    
     steps:
       - checkout
       - run:
