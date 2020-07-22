@@ -1,4 +1,5 @@
-version: 2.1
+version: 2
+
 jobs:
   build:
     machine: true
@@ -6,16 +7,17 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Build image
           command: docker build -t dockercircle .
       - run:
-          name: Push to heroku and Docker Hub
-          command: docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
-                   docker push karoliinaemilia/dockercircle
-                   docker tag registry.heroku.com/dockercircle/web karoliinaemilia/dockercircle
-                   docker push registry.heroku.com/dockercircle/web
-                   heroku container:release dockercircle
+          command: | 
+            docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+            docker push karoliinaemilia/dockercircle
+            docker tag registry.heroku.com/dockercircle/web karoliinaemilia/dockercircle
+            docker push registry.heroku.com/dockercircle/web
+            heroku container:release dockercircle
+                   
 workflows:
+  version: 2
   jobs:
     - build
 
