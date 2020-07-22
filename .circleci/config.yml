@@ -14,7 +14,7 @@ workflows:
       - build
       - docker/publish:
           image: karoliinaemilia/dockercircle
-          tag: 'latest
+          tag: 'latest'
       - heroku/deploy-via-git:
           requires:
             - docker/publish
