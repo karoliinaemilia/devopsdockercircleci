@@ -1,12 +1,9 @@
-version: 2
-
+version: 2.1
 jobs:
   build:
     machine: 
         enabled: true
-        
     working_directory: ~/devopsdockercircleci
-    
     steps:
       - checkout
       - run:
@@ -17,9 +14,7 @@ jobs:
             docker push karoliinaemilia/dockercircle
             docker tag registry.heroku.com/dockercircle/web karoliinaemilia/dockercircle
             docker push registry.heroku.com/dockercircle/web
-            heroku container:release dockercircle
-                   
+            heroku container:release dockercircle   
 workflows:
-  version: 2
   jobs:
       - build
