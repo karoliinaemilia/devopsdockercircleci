@@ -11,12 +11,13 @@ orbs:
 workflows:
   heroku_deploy:
     jobs:
-      - build
       - docker/publish:
           image: karoliinaemilia/dockercircle
           tag: 'latest'
+      - build
+          requires:
+            -docker/publish
       - heroku/deploy-via-git:
           requires:
-            - docker/publish
             - build
 
