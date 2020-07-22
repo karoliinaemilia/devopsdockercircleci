@@ -7,7 +7,7 @@ workflows:
       - docker/publish:
           image: karoliinaemilia/dockercircle
           tag: 'latest'
-      - push_to_heroku
+      - push_to_heroku:
           requires:
             - docker/publish
 jobs:
