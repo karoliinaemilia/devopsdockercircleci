@@ -1,9 +1,9 @@
 version: 2.1
 workflows:
   jobs:
-      - build
+      - build-and-publish
 jobs:
-  build:
+  build-and-publish:
     machine: 
         enabled: true
     working_directory: ~/devopsdockercircleci
