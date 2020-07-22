@@ -3,6 +3,8 @@ jobs:
   build:
     docker:
       - image: karoliinaemilia/dockercircle
+    steps:
+      - checkout
 orbs:
   docker: circleci/docker@1.0.0
   heroku: circleci/heroku@1.1.0
