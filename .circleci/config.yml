@@ -1,20 +1,25 @@
 version: 2.1
+orbs:
+  docker: circleci/docker@1.0.0
 workflows:
-  push_to_heroku:
+  push_to_dockerhub_and_heroku:
     jobs:
-      - build_and_publish
+      - docker/publish:
+          image: karoliinaemilia/dockercircle
+          tag: 'latest'
+      - push_to_heroku
+          requires:
+            - docker/publish
 jobs:
-  build_and_publish:
+  push_to_heroku:
     machine: true
     working_directory: ~/devopsdockercircleci
     steps:
       - checkout
       - run:
-          command: docker build -t dockercircle .
-      - run:
-          command: | 
+          command: |
             docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
-            docker push karoliinaemilia/dockercircle
+            docker pull karoliinaemilia/dockercircle
             docker tag registry.heroku.com/dockercircle/web karoliinaemilia/dockercircle
             docker push registry.heroku.com/dockercircle/web
             heroku container:release dockercircle  
