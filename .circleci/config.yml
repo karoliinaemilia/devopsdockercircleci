@@ -1,9 +1,9 @@
 version: 2.1
 workflows:
-  push-to-heroku:
-    - build-and-publish
+  push_to_heroku:
+    - build_and_publish
 jobs:
-  - build-and-publish:
+  - build_and_publish:
       machine: true
       working_directory: ~/devopsdockercircleciz
       steps:
