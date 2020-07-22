@@ -1,18 +1,19 @@
 version: 2.1
 workflows:
   push-to-heroku:
-    jobs:
-      - build-and-publish:
-          machine: true
-          working_directory: ~/devopsdockercircleci
-          steps:
-            - checkout
-            - run:
-                command: docker build -t dockercircle .
-            - run:
-                command: | 
-                  docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
-                  docker push karoliinaemilia/dockercircle
-                  docker tag registry.heroku.com/dockercircle/web karoliinaemilia/dockercircle
-                  docker push registry.heroku.com/dockercircle/web
-                  heroku container:release dockercircle  
+    - build-and-publish
+jobs:
+  - build-and-publish:
+      machine: true
+      working_directory: ~/devopsdockercircleciz
+      steps:
+        - checkout
+        - run:
+            command: docker build -t dockercircle .
+        - run:
+            command: | 
+              docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+              docker push karoliinaemilia/dockercircle
+              docker tag registry.heroku.com/dockercircle/web karoliinaemilia/dockercircle
+              docker push registry.heroku.com/dockercircle/web
+              heroku container:release dockercircle  
