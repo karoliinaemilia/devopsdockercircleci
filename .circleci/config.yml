@@ -29,4 +29,4 @@ jobs:
           command: |
             heroku container:login
             docker push registry.heroku.com/dockercircle/web
-            heroku container:release dockercircle  
+            heroku container:release web -a=registry.heroku.com/dockercircle/web  
