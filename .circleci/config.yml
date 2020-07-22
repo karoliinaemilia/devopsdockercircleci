@@ -1,4 +1,7 @@
 version: 2.1
+workflows:
+  jobs:
+      - build
 jobs:
   build:
     machine: 
@@ -14,7 +17,4 @@ jobs:
             docker push karoliinaemilia/dockercircle
             docker tag registry.heroku.com/dockercircle/web karoliinaemilia/dockercircle
             docker push registry.heroku.com/dockercircle/web
-            heroku container:release dockercircle   
-workflows:
-  jobs:
-      - build
+            heroku container:release dockercircle  
