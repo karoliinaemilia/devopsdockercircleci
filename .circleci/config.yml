@@ -9,17 +9,14 @@ orbs:
   docker: circleci/docker@1.0.0
   heroku: circleci/heroku@1.1.0
 workflows:
-  deploy:
-    jobs:
-      - docker/publish:
-          image: karoliinaemilia/dockercircle
-          tag: 'latest'
   heroku_deploy:
-    requires:
-      -deploy  
     jobs:
       - build
+      - docker/publish:
+          image: karoliinaemilia/dockercircle
+          tag: 'latest
       - heroku/deploy-via-git:
           requires:
+            - docker/publish
             - build
 
